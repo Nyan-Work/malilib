@@ -32,7 +32,7 @@
 	],
 
 	"depends": {
-		"minecraft": "1.20-alpha.23.12.a",
+		"minecraft": "1.20-alpha.23.13.a",
 		"fabric-resource-loader-v0": "*"
 	}
 }
