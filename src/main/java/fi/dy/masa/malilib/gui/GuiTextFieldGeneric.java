@@ -29,6 +29,7 @@ public class GuiTextFieldGeneric extends TextFieldWidget
     public boolean mouseClicked(double mouseX, double mouseY, int mouseButton)
     {
         boolean ret = super.mouseClicked(mouseX, mouseY, mouseButton);
+        setFocused(ret);
 
         if (mouseButton == 1 && this.isMouseOver((int) mouseX, (int) mouseY))
         {
