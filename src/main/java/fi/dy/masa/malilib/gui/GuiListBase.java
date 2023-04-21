@@ -2,7 +2,7 @@ package fi.dy.masa.malilib.gui;
 
 import javax.annotation.Nullable;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.interfaces.ISelectionListener;
 import fi.dy.masa.malilib.gui.widgets.WidgetListBase;
 import fi.dy.masa.malilib.gui.widgets.WidgetListEntryBase;
@@ -171,11 +171,11 @@ public abstract class GuiListBase<TYPE, WIDGET extends WidgetListEntryBase<TYPE>
     }
 
     @Override
-    public void drawContents(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
+    public void drawContents(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
     {
         if (this.getListWidget() != null)
         {
-            this.getListWidget().drawContents(matrixStack, mouseX, mouseY, partialTicks);
+            this.getListWidget().drawContents(drawableHelper, mouseX, mouseY, partialTicks);
         }
     }
 }

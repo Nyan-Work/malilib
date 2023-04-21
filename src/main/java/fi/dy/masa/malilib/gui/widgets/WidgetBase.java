@@ -2,7 +2,7 @@ package fi.dy.masa.malilib.gui.widgets;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.util.Identifier;
 import fi.dy.masa.malilib.render.RenderUtils;
 
@@ -162,31 +162,31 @@ public abstract class WidgetBase
         return this.textRenderer.getWidth(text);
     }
 
-    public void drawString(int x, int y, int color, String text, MatrixStack matrixStack)
+    public void drawString(int x, int y, int color, String text, DrawableHelper drawableHelper)
     {
-        this.textRenderer.draw(matrixStack, text, x, y, color);
+        drawableHelper.method_51433(this.textRenderer, text, x, y, color, false);
     }
 
-    public void drawCenteredString(int x, int y, int color, String text, MatrixStack matrixStack)
+    public void drawCenteredString(int x, int y, int color, String text, DrawableHelper drawableHelper)
     {
-        this.textRenderer.draw(matrixStack, text, x - this.getStringWidth(text) / 2, y, color);
+        drawableHelper.method_51433(this.textRenderer, text, x - this.getStringWidth(text) / 2, y, color, false);
     }
 
-    public void drawStringWithShadow(int x, int y, int color, String text, MatrixStack matrixStack)
+    public void drawStringWithShadow(int x, int y, int color, String text, DrawableHelper drawableHelper)
     {
-        this.textRenderer.drawWithShadow(matrixStack, text, x, y, color);
+        drawableHelper.drawTextWithShadow(this.textRenderer, text, x, y, color);
     }
 
-    public void drawCenteredStringWithShadow(int x, int y, int color, String text, MatrixStack matrixStack)
+    public void drawCenteredStringWithShadow(int x, int y, int color, String text, DrawableHelper drawableHelper)
     {
-        this.textRenderer.drawWithShadow(matrixStack, text, x - this.getStringWidth(text) / 2, y, color);
+        drawableHelper.drawTextWithShadow(this.textRenderer, text, x - this.getStringWidth(text) / 2, y, color);
     }
 
-    public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack)
+    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
     {
     }
 
-    public void postRenderHovered(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack)
+    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
     {
     }
 }

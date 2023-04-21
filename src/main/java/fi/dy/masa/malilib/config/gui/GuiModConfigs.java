@@ -1,7 +1,8 @@
 package fi.dy.masa.malilib.config.gui;
 
 import java.util.List;
-import net.minecraft.client.util.math.MatrixStack;
+
+import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.config.IConfigBase;
 import fi.dy.masa.malilib.gui.GuiConfigsBase;
 
@@ -34,7 +35,7 @@ public class GuiModConfigs extends GuiConfigsBase
     }
 
     @Override
-    protected void drawTitle(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
+    protected void drawTitle(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
     {
         // NO-OP
     }

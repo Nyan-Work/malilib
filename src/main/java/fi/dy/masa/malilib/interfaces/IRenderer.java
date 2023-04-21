@@ -1,6 +1,8 @@
 package fi.dy.masa.malilib.interfaces;
 
 import java.util.function.Supplier;
+
+import net.minecraft.client.gui.DrawableHelper;
 import org.joml.Matrix4f;
 
 import net.minecraft.client.util.math.MatrixStack;
@@ -11,7 +13,7 @@ public interface IRenderer
     /**
      * Called after the vanilla overlays have been rendered
      */
-    default void onRenderGameOverlayPost(MatrixStack matrixStack) {}
+    default void onRenderGameOverlayPost(DrawableHelper drawableHelper) {}
 
     /**
      * Called after vanilla world rendering

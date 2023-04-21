@@ -1,6 +1,6 @@
 package fi.dy.masa.malilib.gui.widgets;
 
-import net.minecraft.client.util.math.MatrixStack;
+import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.interfaces.IGuiIcon;
 import fi.dy.masa.malilib.render.RenderUtils;
 
@@ -16,7 +16,7 @@ public class WidgetInfoIcon extends WidgetHoverInfo
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack)
+    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
     {
         RenderUtils.color(1f, 1f, 1f, 1f);
         this.bindTexture(this.icon.getTexture());

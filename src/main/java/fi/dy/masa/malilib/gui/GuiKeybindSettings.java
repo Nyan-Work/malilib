@@ -3,8 +3,8 @@ package fi.dy.masa.malilib.gui;
 import java.util.List;
 import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.gui.screen.Screen;
-import net.minecraft.client.util.math.MatrixStack;
 import fi.dy.masa.malilib.config.options.ConfigBase;
 import fi.dy.masa.malilib.config.options.ConfigBoolean;
 import fi.dy.masa.malilib.config.options.ConfigOptionList;
@@ -127,14 +127,14 @@ public class GuiKeybindSettings extends GuiDialogBase
     }
 
     @Override
-    public void render(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
+    public void render(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
     {
         if (this.getParent() != null)
         {
-            this.getParent().render(matrixStack, mouseX, mouseY, partialTicks);
+            this.getParent().render(drawableHelper, mouseX, mouseY, partialTicks);
         }
 
-        super.render(matrixStack, mouseX, mouseY, partialTicks);
+        super.render(drawableHelper, mouseX, mouseY, partialTicks);
     }
 
     @Override
@@ -144,9 +144,9 @@ public class GuiKeybindSettings extends GuiDialogBase
     }
 
     @Override
-    protected void drawTitle(MatrixStack matrixStack, int mouseX, int mouseY, float partialTicks)
+    protected void drawTitle(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
     {
-        this.drawStringWithShadow(matrixStack, this.title, this.dialogLeft + 10, this.dialogTop + 6, COLOR_WHITE);
+        this.drawStringWithShadow(drawableHelper, this.title, this.dialogLeft + 10, this.dialogTop + 6, COLOR_WHITE);
     }
 
     @Override

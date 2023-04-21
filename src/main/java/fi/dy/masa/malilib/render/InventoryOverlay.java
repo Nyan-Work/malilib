@@ -3,6 +3,7 @@ package fi.dy.masa.malilib.render;
 import java.util.ArrayList;
 import java.util.List;
 import com.mojang.blaze3d.systems.RenderSystem;
+import fi.dy.masa.malilib.mixin.GameRendererAccessor;
 import net.minecraft.block.AbstractFurnaceBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.BrewingStandBlock;
@@ -16,6 +17,7 @@ import net.minecraft.block.entity.DispenserBlockEntity;
 import net.minecraft.block.entity.HopperBlockEntity;
 import net.minecraft.block.entity.ShulkerBoxBlockEntity;
 import net.minecraft.client.MinecraftClient;
+import net.minecraft.client.gui.DrawableHelper;
 import net.minecraft.client.item.TooltipContext;
 import net.minecraft.client.render.BufferBuilder;
 import net.minecraft.client.render.GameRenderer;
@@ -175,7 +177,7 @@ public class InventoryOverlay
         RenderUtils.drawTexturedRectBatched(x +   7, y +   7,   7,  17, 162, 108, buffer); // middle
     }
 
-    public static void renderEquipmentOverlayBackground(int x, int y, LivingEntity entity, MatrixStack matrixStack)
+    public static void renderEquipmentOverlayBackground(int x, int y, LivingEntity entity, DrawableHelper drawableHelper)
     {
         RenderUtils.color(1f, 1f, 1f, 1f);
 
@@ -208,7 +210,7 @@ public class InventoryOverlay
         if (entity.getEquippedStack(EquipmentSlot.OFFHAND).isEmpty())
         {
             Identifier texture = new Identifier("minecraft:item/empty_armor_slot_shield");
-            RenderUtils.renderSprite(x + 28 + 1, y + 3 * 18 + 7 + 1, 16, 16, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, texture, matrixStack);
+            RenderUtils.renderSprite(x + 28 + 1, y + 3 * 18 + 7 + 1, 16, 16, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, texture, drawableHelper);
         }
 
         for (int i = 0, xOff = 7, yOff = 7; i < 4; ++i, yOff += 18)
@@ -218,7 +220,7 @@ public class InventoryOverlay
             if (entity.getEquippedStack(eqSlot).isEmpty())
             {
                 Identifier texture = EMPTY_SLOT_TEXTURES[eqSlot.getEntitySlotId()];
-                RenderUtils.renderSprite(x + xOff + 1, y + yOff + 1, 16, 16, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, texture, matrixStack);
+                RenderUtils.renderSprite(x + xOff + 1, y + yOff + 1, 16, 16, PlayerScreenHandler.BLOCK_ATLAS_TEXTURE, texture, drawableHelper);
             }
         }
     }
@@ -482,22 +484,23 @@ public class InventoryOverlay
 
     public static void renderStackAt(ItemStack stack, float x, float y, float scale, MinecraftClient mc)
     {
-        MatrixStack matrixStack = new MatrixStack();
+        DrawableHelper drawableHelper = new DrawableHelper(mc, ((GameRendererAccessor) mc.gameRenderer).getBuffers().getEntityVertexConsumers());
+        MatrixStack matrixStack = drawableHelper.method_51448();
         matrixStack.translate(x, y, 0.f);
         matrixStack.scale(scale, scale, 1);
 
         RenderUtils.enableDiffuseLightingGui3D();
         RenderUtils.color(1f, 1f, 1f, 1f);
 
-        mc.getItemRenderer().renderInGui(matrixStack, stack, 0, 0);
+        drawableHelper.method_51445(stack, 0, 0);
 
         RenderUtils.color(1f, 1f, 1f, 1f);
-        mc.getItemRenderer().renderGuiItemOverlay(matrixStack, mc.textRenderer, stack, 0, 0, null);
+        drawableHelper.method_51432(mc.textRenderer, stack, 0, 0, null);
 
         RenderUtils.color(1f, 1f, 1f, 1f);
     }
 
-    public static void renderStackToolTip(int x, int y, ItemStack stack, MinecraftClient mc, MatrixStack matrixStack)
+    public static void renderStackToolTip(int x, int y, ItemStack stack, MinecraftClient mc, DrawableHelper drawableHelper)
     {
         List<Text> list = stack.getTooltip(mc.player, mc.options.advancedItemTooltips ? TooltipContext.Default.ADVANCED : TooltipContext.Default.BASIC);
         List<String> lines = new ArrayList<>();
@@ -514,7 +517,7 @@ public class InventoryOverlay
             }
         }
 
-        RenderUtils.drawHoverText(x, y, lines, matrixStack);
+        RenderUtils.drawHoverText(x, y, lines, drawableHelper);
     }
 
     public static class InventoryProperties

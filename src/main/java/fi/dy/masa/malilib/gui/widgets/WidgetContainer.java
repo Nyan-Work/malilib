@@ -3,7 +3,8 @@ package fi.dy.masa.malilib.gui.widgets;
 import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
-import net.minecraft.client.util.math.MatrixStack;
+
+import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.render.RenderUtils;
@@ -165,18 +166,18 @@ public abstract class WidgetContainer extends WidgetBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack)
+    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
     {
-        this.drawSubWidgets(mouseX, mouseY, matrixStack);
+        this.drawSubWidgets(mouseX, mouseY, drawableHelper);
     }
 
     @Override
-    public void postRenderHovered(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack)
+    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
     {
-        this.drawHoveredSubWidget(mouseX, mouseY, matrixStack);
+        this.drawHoveredSubWidget(mouseX, mouseY, drawableHelper);
     }
 
-    protected void drawSubWidgets(int mouseX, int mouseY, MatrixStack matrixStack)
+    protected void drawSubWidgets(int mouseX, int mouseY, DrawableHelper drawableHelper)
     {
         this.hoveredSubWidget = null;
 
@@ -184,7 +185,7 @@ public abstract class WidgetContainer extends WidgetBase
         {
             for (WidgetBase widget : this.subWidgets)
             {
-                widget.render(mouseX, mouseY, false, matrixStack);
+                widget.render(mouseX, mouseY, false, drawableHelper);
 
                 if (widget.isMouseOver(mouseX, mouseY))
                 {
@@ -194,11 +195,11 @@ public abstract class WidgetContainer extends WidgetBase
         }
     }
 
-    protected void drawHoveredSubWidget(int mouseX, int mouseY, MatrixStack matrixStack)
+    protected void drawHoveredSubWidget(int mouseX, int mouseY, DrawableHelper drawableHelper)
     {
         if (this.hoveredSubWidget != null)
         {
-            this.hoveredSubWidget.postRenderHovered(mouseX, mouseY, false, matrixStack);
+            this.hoveredSubWidget.postRenderHovered(mouseX, mouseY, false, drawableHelper);
             RenderUtils.disableDiffuseLighting();
         }
     }

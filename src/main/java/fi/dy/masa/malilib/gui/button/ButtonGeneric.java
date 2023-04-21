@@ -1,9 +1,10 @@
 package fi.dy.masa.malilib.gui.button;
 
 import javax.annotation.Nullable;
+
+import net.minecraft.client.gui.DrawableHelper;
 import org.apache.commons.lang3.StringUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
-import net.minecraft.client.util.math.MatrixStack;
 import fi.dy.masa.malilib.gui.LeftRight;
 import fi.dy.masa.malilib.gui.interfaces.IGuiIcon;
 import fi.dy.masa.malilib.render.RenderUtils;
@@ -89,7 +90,7 @@ public class ButtonGeneric extends ButtonBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, MatrixStack matrixStack)
+    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
     {
         if (this.visible)
         {
@@ -137,7 +138,7 @@ public class ButtonGeneric extends ButtonBase
 
                 if (this.textCentered)
                 {
-                    this.drawCenteredStringWithShadow(this.x + this.width / 2, y, color, this.displayString, matrixStack);
+                    this.drawCenteredStringWithShadow(this.x + this.width / 2, y, color, this.displayString, drawableHelper);
                 }
                 else
                 {
@@ -148,7 +149,7 @@ public class ButtonGeneric extends ButtonBase
                         x += this.icon.getWidth() + 2;
                     }
 
-                    this.drawStringWithShadow(x, y, color, this.displayString, matrixStack);
+                    this.drawStringWithShadow(x, y, color, this.displayString, drawableHelper);
                 }
             }
         }

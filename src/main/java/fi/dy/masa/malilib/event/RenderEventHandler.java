@@ -2,6 +2,8 @@ package fi.dy.masa.malilib.event;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import net.minecraft.client.gui.DrawableHelper;
 import org.joml.Matrix4f;
 
 import net.minecraft.client.MinecraftClient;
@@ -56,7 +58,7 @@ public class RenderEventHandler implements IRenderDispatcher
     /**
      * NOT PUBLIC API - DO NOT CALL
      */
-    public void onRenderGameOverlayPost(MatrixStack matrixStack, MinecraftClient mc, float partialTicks)
+    public void onRenderGameOverlayPost(DrawableHelper drawableHelper, MinecraftClient mc, float partialTicks)
     {
         mc.getProfiler().push("malilib_rendergameoverlaypost");
 
@@ -65,13 +67,13 @@ public class RenderEventHandler implements IRenderDispatcher
             for (IRenderer renderer : this.overlayRenderers)
             {
                 mc.getProfiler().push(renderer.getProfilerSectionSupplier());
-                renderer.onRenderGameOverlayPost(matrixStack);
+                renderer.onRenderGameOverlayPost(drawableHelper);
                 mc.getProfiler().pop();
             }
         }
 
         mc.getProfiler().push("malilib_ingamemessages");
-        InfoUtils.renderInGameMessages(matrixStack);
+        InfoUtils.renderInGameMessages(drawableHelper);
         mc.getProfiler().pop();
 
         mc.getProfiler().pop();
@@ -80,7 +82,7 @@ public class RenderEventHandler implements IRenderDispatcher
     /**
      * NOT PUBLIC API - DO NOT CALL
      */
-    public void onRenderTooltipLast(MatrixStack matrixStack, ItemStack stack, int x, int y)
+    public void onRenderTooltipLast(DrawableHelper drawableHelper, ItemStack stack, int x, int y)
     {
         if (this.tooltipLastRenderers.isEmpty() == false)
         {
