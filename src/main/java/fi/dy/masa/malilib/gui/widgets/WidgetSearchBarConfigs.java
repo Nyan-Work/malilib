@@ -1,6 +1,5 @@
 package fi.dy.masa.malilib.gui.widgets;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.LeftRight;
 import fi.dy.masa.malilib.gui.button.ConfigButtonKeybind;
 import fi.dy.masa.malilib.gui.interfaces.IGuiIcon;
@@ -10,6 +9,7 @@ import fi.dy.masa.malilib.hotkeys.KeybindMulti;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings;
 import fi.dy.masa.malilib.hotkeys.KeybindSettings.Context;
 import fi.dy.masa.malilib.util.KeyCodes;
+import net.minecraft.client.gui.DrawContext;
 
 public class WidgetSearchBarConfigs extends WidgetSearchBar
 {
@@ -83,13 +83,13 @@ public class WidgetSearchBarConfigs extends WidgetSearchBar
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
-        super.render(mouseX, mouseY, selected, drawableHelper);
+        super.render(mouseX, mouseY, selected, drawContext);
 
         if (this.searchOpen)
         {
-            this.button.render(mouseX, mouseY, false, drawableHelper);
+            this.button.render(mouseX, mouseY, false, drawContext);
         }
     }
 }

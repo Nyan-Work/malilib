@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Set;
 import javax.annotation.Nullable;
 
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.math.MathHelper;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiScrollBar;
@@ -378,13 +378,13 @@ public abstract class WidgetListBase<TYPE, WIDGET extends WidgetListEntryBase<TY
     }
 
     @Override
-    public void drawContents(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
+    public void drawContents(DrawContext drawContext, int mouseX, int mouseY, float partialTicks)
     {
         RenderUtils.color(1f, 1f, 1f, 1f);
 
         if (this.widgetSearchBar != null)
         {
-            this.widgetSearchBar.render(mouseX, mouseY, false, drawableHelper);
+            this.widgetSearchBar.render(mouseX, mouseY, false, drawContext);
         }
 
         WidgetBase hovered = null;
@@ -416,7 +416,7 @@ public abstract class WidgetListBase<TYPE, WIDGET extends WidgetListEntryBase<TY
             WIDGET widget = this.listWidgets.get(i);
             TYPE entry = widget.getEntry();
             boolean isSelected = this.allowMultiSelection ? this.selectedEntries.contains(entry) : entry != null && entry.equals(this.getLastSelectedEntry());
-            widget.render(mouseX, mouseY, isSelected, drawableHelper);
+            widget.render(mouseX, mouseY, isSelected, drawContext);
 
             if (widget.isMouseOver(mouseX, mouseY))
             {
@@ -432,7 +432,7 @@ public abstract class WidgetListBase<TYPE, WIDGET extends WidgetListEntryBase<TY
 
         if (hovered != null)
         {
-            hovered.postRenderHovered(mouseX, mouseY, hoveredSelected, drawableHelper);
+            hovered.postRenderHovered(mouseX, mouseY, hoveredSelected, drawContext);
         }
 
         RenderUtils.color(1f, 1f, 1f, 1f);

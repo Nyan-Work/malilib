@@ -1,13 +1,13 @@
 package fi.dy.masa.malilib.gui.widgets;
 
 import net.minecraft.SharedConstants;
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.GuiBase;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
 import fi.dy.masa.malilib.gui.LeftRight;
 import fi.dy.masa.malilib.gui.interfaces.IGuiIcon;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.KeyCodes;
+import net.minecraft.client.gui.DrawContext;
 
 public class WidgetSearchBar extends WidgetBase
 {
@@ -120,14 +120,14 @@ public class WidgetSearchBar extends WidgetBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         RenderUtils.color(1f, 1f, 1f, 1f);
         this.iconSearch.render(false, this.iconSearch.isMouseOver(mouseX, mouseY));
 
         if (this.searchOpen)
         {
-            this.searchBox.render(drawableHelper, mouseX, mouseY, 0);
+            this.searchBox.render(drawContext, mouseX, mouseY, 0);
         }
     }
 }

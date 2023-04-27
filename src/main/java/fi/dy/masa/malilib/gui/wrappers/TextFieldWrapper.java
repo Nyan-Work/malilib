@@ -1,9 +1,9 @@
 package fi.dy.masa.malilib.gui.wrappers;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
 import fi.dy.masa.malilib.gui.interfaces.ITextFieldListener;
 import fi.dy.masa.malilib.util.KeyCodes;
+import net.minecraft.client.gui.DrawContext;
 
 public class TextFieldWrapper<T extends GuiTextFieldGeneric>
 {
@@ -44,9 +44,9 @@ public class TextFieldWrapper<T extends GuiTextFieldGeneric>
         }
     }
 
-    public void draw(int mouseX, int mouseY, DrawableHelper drawableHelper)
+    public void draw(int mouseX, int mouseY, DrawContext drawContext)
     {
-        this.textField.render(drawableHelper, mouseX, mouseY, 0f);
+        this.textField.render(drawContext, mouseX, mouseY, 0f);
     }
 
     public boolean mouseClicked(int mouseX, int mouseY, int mouseButton)

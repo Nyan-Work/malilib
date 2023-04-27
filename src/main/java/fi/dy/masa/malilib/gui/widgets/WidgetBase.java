@@ -2,7 +2,7 @@ package fi.dy.masa.malilib.gui.widgets;
 
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.util.Identifier;
 import fi.dy.masa.malilib.render.RenderUtils;
 
@@ -162,31 +162,31 @@ public abstract class WidgetBase
         return this.textRenderer.getWidth(text);
     }
 
-    public void drawString(int x, int y, int color, String text, DrawableHelper drawableHelper)
+    public void drawString(int x, int y, int color, String text, DrawContext drawContext)
     {
-        drawableHelper.method_51433(this.textRenderer, text, x, y, color, false);
+        drawContext.drawText(this.textRenderer, text, x, y, color, false);
     }
 
-    public void drawCenteredString(int x, int y, int color, String text, DrawableHelper drawableHelper)
+    public void drawCenteredString(int x, int y, int color, String text, DrawContext drawContext)
     {
-        drawableHelper.method_51433(this.textRenderer, text, x - this.getStringWidth(text) / 2, y, color, false);
+        drawContext.drawText(this.textRenderer, text, x - this.getStringWidth(text) / 2, y, color, false);
     }
 
-    public void drawStringWithShadow(int x, int y, int color, String text, DrawableHelper drawableHelper)
+    public void drawStringWithShadow(int x, int y, int color, String text, DrawContext drawContext)
     {
-        drawableHelper.drawTextWithShadow(this.textRenderer, text, x, y, color);
+        drawContext.drawTextWithShadow(this.textRenderer, text, x, y, color);
     }
 
-    public void drawCenteredStringWithShadow(int x, int y, int color, String text, DrawableHelper drawableHelper)
+    public void drawCenteredStringWithShadow(int x, int y, int color, String text, DrawContext drawContext)
     {
-        drawableHelper.drawTextWithShadow(this.textRenderer, text, x - this.getStringWidth(text) / 2, y, color);
+        drawContext.drawCenteredTextWithShadow(this.textRenderer, text, x, y, color);
     }
 
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
     }
 
-    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
     }
 }

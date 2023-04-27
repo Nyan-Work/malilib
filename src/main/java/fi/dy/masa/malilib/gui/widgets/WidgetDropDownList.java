@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.MinecraftClient;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.util.math.MatrixStack;
 import fi.dy.masa.malilib.gui.GuiScrollBar;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
@@ -255,14 +255,14 @@ public class WidgetDropDownList<T> extends WidgetBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         RenderUtils.color(1f, 1f, 1f, 1f);
 
         MatrixStack matrixStack = RenderSystem.getModelViewStack();
         matrixStack.push();
         matrixStack.translate(0, 0, 10);
-        MatrixStack matrixStackIn = drawableHelper.method_51448();
+        MatrixStack matrixStackIn = drawContext.getMatrices();
         matrixStackIn.push();
         matrixStackIn.translate(0, 0, 10);
         RenderSystem.applyModelViewMatrix();
@@ -277,7 +277,7 @@ public class WidgetDropDownList<T> extends WidgetBase
         String str = this.getDisplayString(this.getSelectedEntry());
         int txtX = this.x + 4;
         int txtY = this.y + this.height / 2 - this.fontHeight / 2;
-        this.drawString(txtX, txtY, 0xFFE0E0E0, str, drawableHelper);
+        this.drawString(txtX, txtY, 0xFFE0E0E0, str, drawContext);
         txtY += this.height + 1;
         int scrollWidth = 10;
 
@@ -285,7 +285,7 @@ public class WidgetDropDownList<T> extends WidgetBase
         {
             if (this.searchBar.getTextField().getText().isEmpty() == false)
             {
-                this.searchBar.draw(mouseX, mouseY, drawableHelper);
+                this.searchBar.draw(mouseX, mouseY, drawContext);
             }
 
             RenderSystem.depthMask(true);
@@ -310,7 +310,7 @@ public class WidgetDropDownList<T> extends WidgetBase
                 RenderSystem.enableDepthTest();
                 RenderUtils.drawRect(this.x, y, this.width - scrollWidth, this.height, bg);
                 str = this.getDisplayString(list.get(i));
-                this.drawString(txtX, txtY, 0xFFE0E0E0, str, drawableHelper);
+                this.drawString(txtX, txtY, 0xFFE0E0E0, str, drawContext);
                 y += this.height;
                 txtY += this.height;
             }

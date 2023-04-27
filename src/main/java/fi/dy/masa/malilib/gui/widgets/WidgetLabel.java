@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public class WidgetLabel extends WidgetBase
 {
@@ -57,7 +57,7 @@ public class WidgetLabel extends WidgetBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         if (this.visible)
         {
@@ -74,11 +74,11 @@ public class WidgetLabel extends WidgetBase
 
                 if (this.centered)
                 {
-                    this.drawCenteredStringWithShadow(this.x + this.width / 2, yTextStart + i * fontHeight, this.textColor, text, drawableHelper);
+                    this.drawCenteredStringWithShadow(this.x + this.width / 2, yTextStart + i * fontHeight, this.textColor, text, drawContext);
                 }
                 else
                 {
-                    this.drawStringWithShadow(this.x, yTextStart + i * fontHeight, this.textColor, text, drawableHelper);
+                    this.drawStringWithShadow(this.x, yTextStart + i * fontHeight, this.textColor, text, drawContext);
                 }
             }
         }

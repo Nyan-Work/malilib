@@ -6,7 +6,7 @@ import java.util.List;
 import javax.annotation.Nullable;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.client.font.TextRenderer;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import net.minecraft.screen.ScreenTexts;
 import net.minecraft.text.Text;
@@ -159,21 +159,21 @@ public abstract class GuiBase extends Screen implements IMessageConsumer, IStrin
     }
 
     @Override
-    public void render(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
+    public void render(DrawContext drawContext, int mouseX, int mouseY, float partialTicks)
     {
         this.drawScreenBackground(mouseX, mouseY);
-        this.drawTitle(drawableHelper, mouseX, mouseY, partialTicks);
+        this.drawTitle(drawContext, mouseX, mouseY, partialTicks);
 
         // Draw base widgets
-        this.drawWidgets(mouseX, mouseY, drawableHelper);
-        this.drawTextFields(mouseX, mouseY, drawableHelper);
-        this.drawButtons(mouseX, mouseY, partialTicks, drawableHelper);
+        this.drawWidgets(mouseX, mouseY, drawContext);
+        this.drawTextFields(mouseX, mouseY, drawContext);
+        this.drawButtons(mouseX, mouseY, partialTicks, drawContext);
 
-        this.drawContents(drawableHelper, mouseX, mouseY, partialTicks);
+        this.drawContents(drawContext, mouseX, mouseY, partialTicks);
 
-        this.drawButtonHoverTexts(mouseX, mouseY, partialTicks, drawableHelper);
-        this.drawHoveredWidget(mouseX, mouseY, drawableHelper);
-        this.drawGuiMessages(drawableHelper);
+        this.drawButtonHoverTexts(mouseX, mouseY, partialTicks, drawContext);
+        this.drawHoveredWidget(mouseX, mouseY, drawContext);
+        this.drawGuiMessages(drawContext);
     }
 
     @Override
@@ -451,9 +451,9 @@ public abstract class GuiBase extends Screen implements IMessageConsumer, IStrin
         this.messageRenderer.setNextMessageType(type);
     }
 
-    protected void drawGuiMessages(DrawableHelper drawableHelper)
+    protected void drawGuiMessages(DrawContext drawContext)
     {
-        this.messageRenderer.drawMessages(this.width / 2, this.height / 2, drawableHelper);
+        this.messageRenderer.drawMessages(this.width / 2, this.height / 2, drawContext);
     }
 
     public void bindTexture(Identifier texture)
@@ -541,32 +541,32 @@ public abstract class GuiBase extends Screen implements IMessageConsumer, IStrin
         RenderUtils.drawRect(0, 0, this.width, this.height, TOOLTIP_BACKGROUND);
     }
 
-    protected void drawTitle(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
+    protected void drawTitle(DrawContext drawContext, int mouseX, int mouseY, float partialTicks)
     {
-        this.drawString(drawableHelper, this.getTitleString(), LEFT, TOP, COLOR_WHITE);
+        this.drawString(drawContext, this.getTitleString(), LEFT, TOP, COLOR_WHITE);
     }
 
-    protected void drawContents(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
+    protected void drawContents(DrawContext drawContext, int mouseX, int mouseY, float partialTicks)
     {
     }
 
-    protected void drawButtons(int mouseX, int mouseY, float partialTicks, DrawableHelper drawableHelper)
+    protected void drawButtons(int mouseX, int mouseY, float partialTicks, DrawContext drawContext)
     {
         for (ButtonBase button : this.buttons)
         {
-            button.render(mouseX, mouseY, button.isMouseOver(), drawableHelper);
+            button.render(mouseX, mouseY, button.isMouseOver(), drawContext);
         }
     }
 
-    protected void drawTextFields(int mouseX, int mouseY, DrawableHelper drawableHelper)
+    protected void drawTextFields(int mouseX, int mouseY, DrawContext drawContext)
     {
         for (TextFieldWrapper<?> entry : this.textFields)
         {
-            entry.draw(mouseX, mouseY, drawableHelper);
+            entry.draw(mouseX, mouseY, drawContext);
         }
     }
 
-    protected void drawWidgets(int mouseX, int mouseY, DrawableHelper drawableHelper)
+    protected void drawWidgets(int mouseX, int mouseY, DrawContext drawContext)
     {
         this.hoveredWidget = null;
 
@@ -574,7 +574,7 @@ public abstract class GuiBase extends Screen implements IMessageConsumer, IStrin
         {
             for (WidgetBase widget : this.widgets)
             {
-                widget.render(mouseX, mouseY, false, drawableHelper);
+                widget.render(mouseX, mouseY, false, drawContext);
 
                 if (widget.isMouseOver(mouseX, mouseY))
                 {
@@ -584,24 +584,24 @@ public abstract class GuiBase extends Screen implements IMessageConsumer, IStrin
         }
     }
 
-    protected void drawButtonHoverTexts(int mouseX, int mouseY, float partialTicks, DrawableHelper drawableHelper)
+    protected void drawButtonHoverTexts(int mouseX, int mouseY, float partialTicks, DrawContext drawContext)
     {
         for (ButtonBase button : this.buttons)
         {
             if (button.hasHoverText() && button.isMouseOver())
             {
-                RenderUtils.drawHoverText(mouseX, mouseY, button.getHoverStrings(), drawableHelper);
+                RenderUtils.drawHoverText(mouseX, mouseY, button.getHoverStrings(), drawContext);
             }
         }
 
         RenderUtils.disableDiffuseLighting();
     }
 
-    protected void drawHoveredWidget(int mouseX, int mouseY, DrawableHelper drawableHelper)
+    protected void drawHoveredWidget(int mouseX, int mouseY, DrawContext drawContext)
     {
         if (this.hoveredWidget != null)
         {
-            this.hoveredWidget.postRenderHovered(mouseX, mouseY, false, drawableHelper);
+            this.hoveredWidget.postRenderHovered(mouseX, mouseY, false, drawContext);
             RenderUtils.disableDiffuseLighting();
         }
     }
@@ -616,14 +616,14 @@ public abstract class GuiBase extends Screen implements IMessageConsumer, IStrin
         return this.textRenderer.getWidth(text);
     }
 
-    public void drawString(DrawableHelper drawableHelper, String text, int x, int y, int color)
+    public void drawString(DrawContext drawContext, String text, int x, int y, int color)
     {
-        drawableHelper.method_51433(this.textRenderer, text, x, y, color, false);
+        drawContext.drawText(this.textRenderer, text, x, y, color, false);
     }
 
-    public void drawStringWithShadow(DrawableHelper drawableHelper, String text, int x, int y, int color)
+    public void drawStringWithShadow(DrawContext drawContext, String text, int x, int y, int color)
     {
-        drawableHelper.drawTextWithShadow(this.textRenderer, text, x, y, color);
+        drawContext.drawTextWithShadow(this.textRenderer, text, x, y, color);
     }
 
     public int getMaxPrettyNameLength(List<? extends IConfigBase> configs)

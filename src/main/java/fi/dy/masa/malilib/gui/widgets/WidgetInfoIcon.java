@@ -1,8 +1,8 @@
 package fi.dy.masa.malilib.gui.widgets;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.interfaces.IGuiIcon;
 import fi.dy.masa.malilib.render.RenderUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public class WidgetInfoIcon extends WidgetHoverInfo
 {
@@ -16,7 +16,7 @@ public class WidgetInfoIcon extends WidgetHoverInfo
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         RenderUtils.color(1f, 1f, 1f, 1f);
         this.bindTexture(this.icon.getTexture());

@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.sound.PositionedSoundInstance;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Identifier;
@@ -154,11 +154,11 @@ public abstract class ButtonBase extends WidgetBase
     }
 
     @Override
-    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         if (this.hasHoverText() && this.isMouseOver())
         {
-            RenderUtils.drawHoverText(mouseX, mouseY, this.getHoverStrings(), drawableHelper);
+            RenderUtils.drawHoverText(mouseX, mouseY, this.getHoverStrings(), drawContext);
             RenderUtils.disableDiffuseLighting();
         }
     }

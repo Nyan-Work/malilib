@@ -2,7 +2,7 @@ package fi.dy.masa.malilib.gui.button;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import org.apache.commons.lang3.StringUtils;
 import com.mojang.blaze3d.systems.RenderSystem;
 import fi.dy.masa.malilib.gui.LeftRight;
@@ -90,7 +90,7 @@ public class ButtonGeneric extends ButtonBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         if (this.visible)
         {
@@ -138,7 +138,7 @@ public class ButtonGeneric extends ButtonBase
 
                 if (this.textCentered)
                 {
-                    this.drawCenteredStringWithShadow(this.x + this.width / 2, y, color, this.displayString, drawableHelper);
+                    this.drawCenteredStringWithShadow(this.x + this.width / 2, y, color, this.displayString, drawContext);
                 }
                 else
                 {
@@ -149,7 +149,7 @@ public class ButtonGeneric extends ButtonBase
                         x += this.icon.getWidth() + 2;
                     }
 
-                    this.drawStringWithShadow(x, y, color, this.displayString, drawableHelper);
+                    this.drawStringWithShadow(x, y, color, this.displayString, drawContext);
                 }
             }
         }

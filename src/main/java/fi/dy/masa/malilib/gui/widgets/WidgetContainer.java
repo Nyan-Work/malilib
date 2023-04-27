@@ -4,10 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Nullable;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.button.ButtonBase;
 import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.render.RenderUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public abstract class WidgetContainer extends WidgetBase
 {
@@ -166,18 +166,18 @@ public abstract class WidgetContainer extends WidgetBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
-        this.drawSubWidgets(mouseX, mouseY, drawableHelper);
+        this.drawSubWidgets(mouseX, mouseY, drawContext);
     }
 
     @Override
-    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
-        this.drawHoveredSubWidget(mouseX, mouseY, drawableHelper);
+        this.drawHoveredSubWidget(mouseX, mouseY, drawContext);
     }
 
-    protected void drawSubWidgets(int mouseX, int mouseY, DrawableHelper drawableHelper)
+    protected void drawSubWidgets(int mouseX, int mouseY, DrawContext drawContext)
     {
         this.hoveredSubWidget = null;
 
@@ -185,7 +185,7 @@ public abstract class WidgetContainer extends WidgetBase
         {
             for (WidgetBase widget : this.subWidgets)
             {
-                widget.render(mouseX, mouseY, false, drawableHelper);
+                widget.render(mouseX, mouseY, false, drawContext);
 
                 if (widget.isMouseOver(mouseX, mouseY))
                 {
@@ -195,11 +195,11 @@ public abstract class WidgetContainer extends WidgetBase
         }
     }
 
-    protected void drawHoveredSubWidget(int mouseX, int mouseY, DrawableHelper drawableHelper)
+    protected void drawHoveredSubWidget(int mouseX, int mouseY, DrawContext drawContext)
     {
         if (this.hoveredSubWidget != null)
         {
-            this.hoveredSubWidget.postRenderHovered(mouseX, mouseY, false, drawableHelper);
+            this.hoveredSubWidget.postRenderHovered(mouseX, mouseY, false, drawContext);
             RenderUtils.disableDiffuseLighting();
         }
     }

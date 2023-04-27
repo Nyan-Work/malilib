@@ -3,9 +3,9 @@ package fi.dy.masa.malilib.gui.widgets;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public class WidgetHoverInfo extends WidgetBase
 {
@@ -53,13 +53,13 @@ public class WidgetHoverInfo extends WidgetBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
     }
 
     @Override
-    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
-        RenderUtils.drawHoverText(mouseX, mouseY, this.lines, drawableHelper);
+        RenderUtils.drawHoverText(mouseX, mouseY, this.lines, drawContext);
     }
 }

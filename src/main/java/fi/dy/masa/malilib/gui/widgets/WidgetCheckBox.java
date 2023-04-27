@@ -3,10 +3,10 @@ package fi.dy.masa.malilib.gui.widgets;
 import java.util.List;
 import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.interfaces.IGuiIcon;
 import fi.dy.masa.malilib.gui.interfaces.ISelectionListener;
 import fi.dy.masa.malilib.render.RenderUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public class WidgetCheckBox extends WidgetBase
 {
@@ -87,7 +87,7 @@ public class WidgetCheckBox extends WidgetBase
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         IGuiIcon icon = this.checked ? this.widgetChecked : this.widgetUnchecked;
 
@@ -99,15 +99,15 @@ public class WidgetCheckBox extends WidgetBase
         int y = this.y + 1 + (this.height - this.fontHeight) / 2;
         int textColor = this.checked ? 0xFFFFFFFF : 0xB0B0B0B0;
 
-        this.drawStringWithShadow(this.x + iw + 3, y, textColor, this.displayText, drawableHelper);
+        this.drawStringWithShadow(this.x + iw + 3, y, textColor, this.displayText, drawContext);
     }
 
     @Override
-    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         if (this.hoverInfo.isEmpty() == false)
         {
-            RenderUtils.drawHoverText(mouseX, mouseY, this.hoverInfo, drawableHelper);
+            RenderUtils.drawHoverText(mouseX, mouseY, this.hoverInfo, drawContext);
         }
     }
 }

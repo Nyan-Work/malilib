@@ -2,7 +2,6 @@ package fi.dy.masa.malilib.gui.widgets;
 
 import java.util.function.IntConsumer;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.config.IConfigInteger;
 import fi.dy.masa.malilib.config.options.ConfigInteger;
 import fi.dy.masa.malilib.gui.GuiBase;
@@ -11,6 +10,7 @@ import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.Color4f;
 import fi.dy.masa.malilib.util.GuiUtils;
 import fi.dy.masa.malilib.util.StringUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public class WidgetColorIndicator extends WidgetBase
 {
@@ -41,13 +41,13 @@ public class WidgetColorIndicator extends WidgetBase
     }
 
     @Override
-    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void postRenderHovered(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
-        RenderUtils.drawHoverText(mouseX, mouseY, this.hoverText, drawableHelper);
+        RenderUtils.drawHoverText(mouseX, mouseY, this.hoverText, drawContext);
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         int x = this.getX();
         int y = this.getY();

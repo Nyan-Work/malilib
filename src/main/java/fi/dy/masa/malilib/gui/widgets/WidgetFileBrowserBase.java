@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Locale;
 import javax.annotation.Nullable;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.interfaces.IDirectoryCache;
 import fi.dy.masa.malilib.gui.interfaces.IDirectoryNavigator;
 import fi.dy.masa.malilib.gui.interfaces.IFileBrowserIconProvider;
@@ -18,6 +17,7 @@ import fi.dy.masa.malilib.gui.widgets.WidgetFileBrowserBase.DirectoryEntry;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.FileUtils;
 import fi.dy.masa.malilib.util.KeyCodes;
+import net.minecraft.client.gui.DrawContext;
 
 public abstract class WidgetFileBrowserBase extends WidgetListBase<DirectoryEntry, WidgetDirectoryEntry> implements IDirectoryNavigator
 {
@@ -75,17 +75,17 @@ public abstract class WidgetFileBrowserBase extends WidgetListBase<DirectoryEntr
     }
 
     @Override
-    public void drawContents(DrawableHelper drawableHelper, int mouseX, int mouseY, float partialTicks)
+    public void drawContents(DrawContext drawContext, int mouseX, int mouseY, float partialTicks)
     {
         // Draw an outline around the entire file browser
         RenderUtils.drawOutlinedBox(this.posX, this.posY, this.browserWidth, this.browserHeight, 0xB0000000, COLOR_HORIZONTAL_BAR);
 
-        super.drawContents(drawableHelper, mouseX, mouseY, partialTicks);
+        super.drawContents(drawContext, mouseX, mouseY, partialTicks);
 
-        this.drawAdditionalContents(mouseX, mouseY, drawableHelper);
+        this.drawAdditionalContents(mouseX, mouseY, drawContext);
     }
 
-    protected void drawAdditionalContents(int mouseX, int mouseY, DrawableHelper drawableHelper)
+    protected void drawAdditionalContents(int mouseX, int mouseY, DrawContext drawContext)
     {
     }
 

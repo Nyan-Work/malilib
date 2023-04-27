@@ -3,8 +3,8 @@ package fi.dy.masa.malilib.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.util.StringUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public class Message
 {
@@ -44,13 +44,13 @@ public class Message
      * Renders the lines for this message
      * @return the y coordinate of the next message
      */
-    public int renderAt(int x, int y, int textColor, DrawableHelper drawableHelper)
+    public int renderAt(int x, int y, int textColor, DrawContext drawContext)
     {
         String format = this.getFormatCode();
 
         for (String text : this.messageLines)
         {
-            StringUtils.drawString(x, y, textColor, format + text + GuiBase.TXT_RST, drawableHelper);
+            StringUtils.drawString(x, y, textColor, format + text + GuiBase.TXT_RST, drawContext);
             y += StringUtils.getFontHeight() + 1;
         }
 

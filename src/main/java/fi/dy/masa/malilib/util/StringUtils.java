@@ -400,8 +400,8 @@ public class StringUtils
         return net.minecraft.client.MinecraftClient.getInstance().textRenderer.getWidth(text);
     }
 
-    public static void drawString(int x, int y, int color, String text, net.minecraft.client.gui.DrawableHelper drawableHelper)
+    public static void drawString(int x, int y, int color, String text, net.minecraft.client.gui.DrawContext drawContext)
     {
-        drawableHelper.method_51433(net.minecraft.client.MinecraftClient.getInstance().textRenderer, text, x, y, color, false);
+        drawContext.drawText(net.minecraft.client.MinecraftClient.getInstance().textRenderer, text, x, y, color, false);
     }
 }

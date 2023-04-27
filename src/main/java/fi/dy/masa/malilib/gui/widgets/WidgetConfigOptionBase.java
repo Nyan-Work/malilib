@@ -2,7 +2,6 @@ package fi.dy.masa.malilib.gui.widgets;
 
 import javax.annotation.Nullable;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.config.IConfigResettable;
 import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerTextField;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
@@ -10,6 +9,7 @@ import fi.dy.masa.malilib.gui.button.ButtonGeneric;
 import fi.dy.masa.malilib.gui.wrappers.TextFieldWrapper;
 import fi.dy.masa.malilib.util.KeyCodes;
 import fi.dy.masa.malilib.util.StringUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public abstract class WidgetConfigOptionBase<TYPE> extends WidgetListEntryBase<TYPE>
 {
@@ -128,11 +128,11 @@ public abstract class WidgetConfigOptionBase<TYPE> extends WidgetListEntryBase<T
         return false;
     }
 
-    protected void drawTextFields(int mouseX, int mouseY, DrawableHelper drawableHelper)
+    protected void drawTextFields(int mouseX, int mouseY, DrawContext drawContext)
     {
         if (this.textField != null)
         {
-            this.textField.getTextField().render(drawableHelper, mouseX, mouseY, 0f);
+            this.textField.getTextField().render(drawContext, mouseX, mouseY, 0f);
         }
     }
 }

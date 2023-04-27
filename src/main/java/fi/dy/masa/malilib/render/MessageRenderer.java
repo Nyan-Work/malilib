@@ -3,9 +3,9 @@ package fi.dy.masa.malilib.render;
 import java.util.ArrayList;
 import java.util.List;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.gui.Message;
 import fi.dy.masa.malilib.gui.Message.MessageType;
+import net.minecraft.client.gui.DrawContext;
 
 public class MessageRenderer
 {
@@ -110,7 +110,7 @@ public class MessageRenderer
         return height;
     }
 
-    public void drawMessages(int x, int y, DrawableHelper drawableHelper)
+    public void drawMessages(int x, int y, DrawContext drawContext)
     {
         if (this.messages.isEmpty() == false)
         {
@@ -149,7 +149,7 @@ public class MessageRenderer
             for (int i = 0; i < this.messages.size(); ++i)
             {
                 Message message = this.messages.get(i);
-                y = message.renderAt(x, y, 0xFFFFFFFF, drawableHelper);
+                y = message.renderAt(x, y, 0xFFFFFFFF, drawContext);
 
                 if (message.hasExpired(currentTime))
                 {

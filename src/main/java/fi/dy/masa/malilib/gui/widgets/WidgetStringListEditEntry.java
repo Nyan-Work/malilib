@@ -2,7 +2,6 @@ package fi.dy.masa.malilib.gui.widgets;
 
 import java.util.List;
 
-import net.minecraft.client.gui.DrawableHelper;
 import fi.dy.masa.malilib.config.IConfigStringList;
 import fi.dy.masa.malilib.config.gui.ConfigOptionChangeListenerTextField;
 import fi.dy.masa.malilib.gui.GuiTextFieldGeneric;
@@ -13,6 +12,7 @@ import fi.dy.masa.malilib.gui.button.IButtonActionListener;
 import fi.dy.masa.malilib.gui.interfaces.IGuiIcon;
 import fi.dy.masa.malilib.render.RenderUtils;
 import fi.dy.masa.malilib.util.StringUtils;
+import net.minecraft.client.gui.DrawContext;
 
 public class WidgetStringListEditEntry extends WidgetConfigOptionBase<String>
 {
@@ -194,7 +194,7 @@ public class WidgetStringListEditEntry extends WidgetConfigOptionBase<String>
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         RenderUtils.color(1f, 1f, 1f, 1f);
 
@@ -208,9 +208,9 @@ public class WidgetStringListEditEntry extends WidgetConfigOptionBase<String>
             RenderUtils.drawRect(this.x, this.y, this.width, this.height, 0x30FFFFFF);
         }
 
-        this.drawSubWidgets(mouseX, mouseY, drawableHelper);
-        this.drawTextFields(mouseX, mouseY, drawableHelper);
-        super.render(mouseX, mouseY, selected, drawableHelper);
+        this.drawSubWidgets(mouseX, mouseY, drawContext);
+        this.drawTextFields(mouseX, mouseY, drawContext);
+        super.render(mouseX, mouseY, selected, drawContext);
     }
 
     public static class ChangeListenerTextField extends ConfigOptionChangeListenerTextField

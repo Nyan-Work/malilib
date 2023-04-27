@@ -2,7 +2,7 @@ package fi.dy.masa.malilib.gui.widgets;
 
 import javax.annotation.Nullable;
 import com.google.common.collect.ImmutableList;
-import net.minecraft.client.gui.DrawableHelper;
+import net.minecraft.client.gui.DrawContext;
 import net.minecraft.client.gui.screen.Screen;
 import fi.dy.masa.malilib.config.ConfigType;
 import fi.dy.masa.malilib.config.IConfigBase;
@@ -371,16 +371,16 @@ public class WidgetConfigOption extends WidgetConfigOptionBase<ConfigOptionWrapp
     }
 
     @Override
-    public void render(int mouseX, int mouseY, boolean selected, DrawableHelper drawableHelper)
+    public void render(int mouseX, int mouseY, boolean selected, DrawContext drawContext)
     {
         RenderUtils.color(1f, 1f, 1f, 1f);
 
-        this.drawSubWidgets(mouseX, mouseY, drawableHelper);
+        this.drawSubWidgets(mouseX, mouseY, drawContext);
 
         if (this.wrapper.getType() == ConfigOptionWrapper.Type.CONFIG)
         {
-            this.drawTextFields(mouseX, mouseY, drawableHelper);
-            super.render(mouseX, mouseY, selected, drawableHelper);
+            this.drawTextFields(mouseX, mouseY, drawContext);
+            super.render(mouseX, mouseY, selected, drawContext);
         }
     }
 
