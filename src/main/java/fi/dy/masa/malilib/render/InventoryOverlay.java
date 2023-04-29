@@ -485,6 +485,7 @@ public class InventoryOverlay
     public static void renderStackAt(ItemStack stack, float x, float y, float scale, MinecraftClient mc, DrawContext drawContext)
     {
         MatrixStack matrixStack = drawContext.getMatrices();
+        matrixStack.push();
         matrixStack.translate(x, y, 0.f);
         matrixStack.scale(scale, scale, 1);
 
@@ -497,6 +498,7 @@ public class InventoryOverlay
         drawContext.drawItemInSlot(mc.textRenderer, stack, 0, 0, null);
 
         RenderUtils.color(1f, 1f, 1f, 1f);
+        matrixStack.pop();
     }
 
     public static void renderStackToolTip(int x, int y, ItemStack stack, MinecraftClient mc, DrawContext drawContext)
