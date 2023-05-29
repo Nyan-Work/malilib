@@ -26,6 +26,8 @@ import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+import java.util.Objects;
+
 public class InventoryUtils
 {
     private static final DefaultedList<ItemStack> EMPTY_LIST = DefaultedList.of();
@@ -38,7 +40,7 @@ public class InventoryUtils
      */
     public static boolean areStacksEqual(ItemStack stack1, ItemStack stack2)
     {
-        return ItemStack.areItemsEqual(stack1, stack2) && ItemStack.areNbtEqual(stack1, stack2);
+        return ItemStack.areItemsEqual(stack1, stack2) && Objects.equals(stack1, stack2);
     }
 
     /**
@@ -50,7 +52,7 @@ public class InventoryUtils
      */
     public static boolean areStacksEqualIgnoreDurability(ItemStack stack1, ItemStack stack2)
     {
-        return ItemStack.areItemsEqual(stack1, stack2) && ItemStack.areNbtEqual(stack1, stack2);
+        return ItemStack.areItemsEqual(stack1, stack2) && Objects.equals(stack1.getNbt(), stack2.getNbt());
     }
 
     /**
