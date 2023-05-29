@@ -4,6 +4,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.registry.Registries;
 import net.minecraft.util.Identifier;
 
+import java.util.Objects;
+
 /**
  * A wrapper around ItemStack, that implements hashCode() and equals().
  * Whether or not the NBT data is considered by those methods,
@@ -78,7 +80,7 @@ public class ItemType
                 return false;
             }
 
-            return this.checkNBT() == false || ItemStack.areNbtEqual(this.stack, other.stack);
+            return this.checkNBT() == false || Objects.equals(this.stack.getNbt(), other.stack.getNbt());
         }
     }
 
