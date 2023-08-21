@@ -1,3 +1,9 @@
+# ⚠️This is a third-party port, currently based on old code, so if you find any bugs, please do not report them to Masa.⚠️
+
+Jitpack support
+===================
+The branch artifacts support fetching from jitpack: https://jitpack.io/#Nyan-Work/malilib
+
 arne branch warning
 ===================
 **Do not base any external work on these arne branches!!
